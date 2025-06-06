@@ -1,0 +1,5 @@
+Admin::create([
+    'name' => 'Admin User',
+    'email' => 'abcd@gmail.com',
+    'password' => '123456789', 
+]);
