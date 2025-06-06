@@ -27,6 +27,6 @@ class Admin extends Authenticatable
 }
 
 // For testing purposes, you can uncomment the following lines to create an admin user.
-// Admin::create(['name' => 'Admin User 3','email' => 'abcd3@gmail.com','password' => bcrypt('123456789'), ]);
+// Admin::create(['name' => 'Admin 2','email' => 'abcd2@gmail.com','password' => bcrypt('123456789'), ]);
 
 // $admin = Admin::where('email', 'abcd@gmail.com')->where('password', '123456789')->first();

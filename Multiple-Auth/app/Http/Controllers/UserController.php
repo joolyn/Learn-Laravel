@@ -31,7 +31,7 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('web')->attempt($credentials)) {
-            $request->session()->regenerate(); 
+            $request->session()->regenerate();
             
             return redirect()->route('user-main'); // user dashboard
         } else {
