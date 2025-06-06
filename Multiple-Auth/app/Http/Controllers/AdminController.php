@@ -56,9 +56,7 @@ class AdminController extends Controller
             'description' => 'required|string',
         ]);
 
-        // $value = $request->session()->get('admin_id'); // Get admin ID from session
         $value = session('admin_id'); // Get admin ID from session
-        // $value = 0;
 
         if ($value) {
             $admin = new Admin_Crud();
