@@ -6,15 +6,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
-
-    public $timestamps = false;
-
 
     /**
      * The attributes that are mass assignable.
@@ -46,10 +42,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            // 'password' => 'hashed',
+            'password' => 'hashed',
         ];
     }
 }
-
-// For testing purposes, you can uncomment the following lines to create a user.
-// User::create(['name' => 'Test User', 'email' => 'user@gmail.com', 'password' => Hash::make('123456789'), ]);
