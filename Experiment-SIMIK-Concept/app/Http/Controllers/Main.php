@@ -28,12 +28,29 @@ class Main extends Controller
     }
 
 
-    public function setMode(Request $request)
-    {
-        $currentStatus = Cache::get('led_mode', 'manual'); // default status adalah 'mati'
-        $newMode = ($currentStatus === 'manual') ? 'autopilot' : 'manual';
-        Cache::put('led_mode', $newMode, now()->addMinutes(60)); // expire dalam 1 jam
-        return redirect('/main'); // kembali ke halaman utama
+    public function sendMode(Request $request)
+    {   
+        // Versi monolitic
+        // $currentStatus = Cache::get('led_mode', 'manual'); // default status adalah 'mati'
+        // $newMode = ($currentStatus === 'manual') ? 'autopilot' : 'manual';
+        // Cache::put('led_mode', $newMode, now()->addMinutes(60)); // expire dalam 1 jam
+        // return redirect('/main'); // kembali ke halaman utama
+
+        $status = $request->input('mode');
+
+        if ($status === "manual") {
+            Cache::put('led_mode', "automatic", now()->addMinutes(60));
+            return response()->json(['status' => 'berhasil', 'mode' => 'manual']);
+        } else if ($status === "automatic") {
+            Cache::put('led_mode', "manual", now()->addMinutes(60));
+            return response()->json(['status' => 'berhasil', 'mode' => 'automatic']);
+        } else {
+            return response()->json(['status' => 'gagal', 'pesan' => 'Mode tidak valid'], 400);
+        }
+
+        
+    
+        return response()->json(['status' => 'gagal', 'message' => 'Mode tidak ditemukan'], 400);
     }
 
     public function getStatus()
