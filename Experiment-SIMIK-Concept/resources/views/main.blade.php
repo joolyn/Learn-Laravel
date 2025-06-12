@@ -49,9 +49,12 @@
             } else if (event.key === "s" || event.key === "S") {
                 event.preventDefault();
                 document.getElementById('myButtonStop').click();
-            } else if (event.key === "d" || event.key === "D") {
+            } else if (event.key === "d" || event.key === "D") { 
                 event.preventDefault();
                 document.getElementById('myButtonRight').click();
+            } else if (event.key === "x" || event.key === "X") {
+                event.preventDefault();
+                document.getElementById('myButtonBackward').click();
             }
         });
         
