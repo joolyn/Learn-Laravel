@@ -5,8 +5,8 @@
 </head>
 <html>
 <body style="font-family:sans-serif;">
-    {{-- <h1>Status: <span id="mode">{{ $mode }}</span></h1>
-    <form method="POST" action="/toggle-mode">
+    <!-- {{-- <h1>Status: <span id="mode">{{ $mode }}</span></h1> -->
+    <!-- <form method="POST" action="/toggle-mode">
         @csrf
         <button id="myButton" type="submit" style="font-size:24px;">Tekan Untuk Manual / Autopilot</button>
     </form>
@@ -15,7 +15,7 @@
     <form method="POST" action="/toggle-status">
         @csrf
         <button type="submit" style="font-size:24px;">Tekan Untuk Nyala / Mati</button>
-    </form> --}}
+    </form> --}} -->
 
     <h1>Status: <span id="mode"></span></h1>
     <button id="myButton" onclick="sendMode()" type="submit" style="font-size:24px;">Tekan Untuk Manual / Autopilot</button>
@@ -25,6 +25,12 @@
 
     <script></script>
     <script>
+        // window.onload = getData();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            getData();
+        });
+
         // Shortcut A
         document.addEventListener("keypress", function(event) {
             if (event.key === "a" || event.key === "A") {
@@ -32,10 +38,10 @@
                 document.getElementById('myButton').click();
             }
         });
-        
+
         // Get Data
         function getData() {
-            axios.get('http://103.179.56.23:8000/iot')
+            axios.get('http://localhost:8000/iot')
                 .then(response => {
                     const data = response.data;
 
@@ -48,26 +54,22 @@
                 });
         }
 
-        // Panggil setiap 500ms
-        setInterval(getData, 500);
-        getData();
-
         function sendMode() {
             const modeElement = document.getElementById('mode');
             const modeValue = modeElement.textContent; // atau gunakan .value jika <input>
 
-            axios.post('http://103.179.56.23:8000/sendmode', {
+            axios.post('http://localhost:8000/sendmode', {
                 mode: modeValue
             })
             .then(function (response) {
                 console.log('Response:', response.data);
+                getData();
+    
             })
             .catch(function (error) {
                 console.error('Terjadi kesalahan:', error);
             });
         }
-
-
         
     </script>
 </body>

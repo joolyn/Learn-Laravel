@@ -36,6 +36,8 @@ class Main extends Controller
         // Cache::put('led_mode', $newMode, now()->addMinutes(60)); // expire dalam 1 jam
         // return redirect('/main'); // kembali ke halaman utama
 
+
+        // Version json
         $status = $request->input('mode');
 
         if ($status === "manual") {
@@ -48,8 +50,6 @@ class Main extends Controller
             return response()->json(['status' => 'gagal', 'pesan' => 'Mode tidak valid'], 400);
         }
 
-        
-    
         return response()->json(['status' => 'gagal', 'message' => 'Mode tidak ditemukan'], 400);
     }
 
