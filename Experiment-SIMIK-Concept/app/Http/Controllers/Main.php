@@ -53,6 +53,7 @@ class Main extends Controller
         return response()->json(['status' => 'gagal', 'message' => 'Mode tidak ditemukan'], 400);
     }
 
+    // FOr Send Data Sensor
     public function sendDataSensorIR (Request $request) 
     {
         $status = $request->input('status');
@@ -64,16 +65,35 @@ class Main extends Controller
         }
     }
 
+    // For Get Data Sensor IR
     public function getDataSensorIR ()
     {
         $status = Cache::get('ir', "");
         return response()->json(['ir' => $status]);
     }
 
+    // For Send Data DO
+    public function sendDo (Request $request) 
+    {
+        $status = $request->input('do');
+
+        Cache::add('do', '');
+        
+        if ($status === "forward") {
+            Cache::put('do', 'forward', now()->addMinutes(1));
+        } else if ($status === "left") {
+            Cache::put('do', 'left', now()->addMinutes(1));
+        } else if ($status === "right") {
+            Cache::put('do', 'right', now()->addMinutes(1));
+        } else if ($status === "stop") {
+            Cache::put('do', 'stop', now()->addMinutes(1));            
+        }
+    }
+
     public function getStatus()
     {
         $mode = Cache::get('led_mode', 'manual'); // default mode adalah 'normal'
-        $status = Cache::get('led_status', 'mati');
-        return response()->json(['mode' => $mode, 'status' => $status]);
+        $do = Cache::get('do', 'stop');
+        return response()->json(['mode' => $mode, 'do' => $do]);
     }
 }

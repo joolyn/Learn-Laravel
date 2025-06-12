@@ -20,6 +20,12 @@
     <h1>Status: <span id="mode"></span></h1>
     <button id="myButton" onclick="sendMode()" type="submit" style="font-size:24px;">Tekan Untuk Manual / Autopilot</button>
     <br>
+    <h1>Do it: <span id="do"></span></h1>
+    <button id="myButtonForward" onclick="doForward()" type="submit" style="font-size:24px;">Forward</button>
+    <button id="myButtonLeft" onclick="doLeft()" type="submit" style="font-size:24px;">Left</button>
+    <button id="myButtonRight" onclick="doRight()" type="submit" style="font-size:24px;">Right</button>
+    <button id="myButtonStop" onclick="doStop()" type="submit" style="font-size:24px;">Stop</button>
+    <br>
     <h1>Status: <span id="status"></span></h1>
     <button type="submit" onclick="sendStatus" style="font-size:24px;">Tekan Untuk Nyala / Mati</button>
 
@@ -31,13 +37,23 @@
             getData();
         });
 
-        // Shortcut A
+        // Shortcut 
         document.addEventListener("keypress", function(event) {
-            if (event.key === "a" || event.key === "A") {
+            if (event.key === "w" || event.key === "W") {
                 event.preventDefault();
-                document.getElementById('myButton').click();
+                document.getElementById('myButtonForward').click();
+            } else if (event.key === "a" || event.key === "A") {
+                event.preventDefault();
+                document.getElementById('myButtonLeft').click();
+            } else if (event.key === "s" || event.key === "S") {
+                event.preventDefault();
+                document.getElementById('myButtonStop').click();
+            } else if (event.key === "d" || event.key === "D") {
+                event.preventDefault();
+                document.getElementById('myButtonRight').click();
             }
         });
+        
 
         // Get Data
         function getData() {
@@ -47,7 +63,7 @@
 
                     // Perbaikan penulisan function dan ID
                     document.getElementById('mode').textContent = data.mode || "";
-                    document.getElementById('status').textContent = data.status || "";
+                    document.getElementById('do').textContent = data.do || "";
                 })
                 .catch(error => {
                     console.error('Error ambil data:', error);
@@ -71,6 +87,58 @@
             });
         }
         
+        function doForward () {
+            axios.post('http://localhost:8000/send-do', {
+                "do": "forward"
+            })
+            .then(function (response) {
+                console.log('Response:', response.data);
+                getData();
+    
+            })
+            .catch(function (error) {
+                console.error('Terjadi kesalahan:', error);
+            });
+        }
+
+        function doLeft () {
+            axios.post('http://localhost:8000/send-do', {
+                "do": "left"
+            })
+            .then(function (response) {
+                console.log('Response:', response.data);
+                getData();
+            })
+            .catch(function (error) {
+                console.error('Terjadi kesalahan:', error);
+            });
+        }
+
+        function doRight () {
+            axios.post('http://localhost:8000/send-do', {
+                "do": "right"
+            })
+            .then(function (response) {
+                console.log('Response:', response.data);
+                getData();
+            })
+            .catch(function (error) {
+                console.error('Terjadi kesalahan:', error);
+            });
+        }
+
+        function doStop () {
+            axios.post('http://localhost:8000/send-do', {
+                "do": "stop"
+            })
+            .then(function (response) {
+                console.log('Response:', response.data);
+                getData();
+            })
+            .catch(function (error) {
+                console.error('Terjadi kesalahan:', error);
+            });
+        }
     </script>
 </body>
 </html>

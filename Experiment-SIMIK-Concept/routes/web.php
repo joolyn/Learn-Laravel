@@ -17,6 +17,9 @@ Route::post('/sendmode', [Main::class, 'sendMode']);
 Route::get('/irsensor', [Main::class, 'getDataSensorIR']);
 Route::post('/sendircondition', [Main::class, 'sendDataSensorIR']);
 
+// For POST status do
+Route::post('/send-do', [Main::class, 'sendDo']);
+
 
 // For Get Status Control
 Route::get('/iot', [Main::class, 'getStatus'])->name('getStatus');
