@@ -53,6 +53,23 @@ class Main extends Controller
         return response()->json(['status' => 'gagal', 'message' => 'Mode tidak ditemukan'], 400);
     }
 
+    public function sendDataSensorIR (Request $request) 
+    {
+        $status = $request->input('status');
+
+        if ($status === "detection") {
+            Cache::put('ir', 'detection', now()->addMinutes(1));
+        } else if ($status === "no-detection") {
+            Cache::put('ir', "no-detection", now()->addMinutes(1));
+        }
+    }
+
+    public function getDataSensorIR ()
+    {
+        $status = Cache::get('ir', "");
+        return response()->json(['ir' => $status]);
+    }
+
     public function getStatus()
     {
         $mode = Cache::get('led_mode', 'manual'); // default mode adalah 'normal'

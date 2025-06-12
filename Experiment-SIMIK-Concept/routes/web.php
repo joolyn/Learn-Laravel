@@ -13,6 +13,10 @@ Route::get('/main', [Main::class, 'index']);
 Route::post('/toggle-status', [Main::class, 'setStatus']);
 Route::post('/sendmode', [Main::class, 'sendMode']);
 
+// For POST and GET status IR Sensor
+Route::get('/irsensor', [Main::class, 'getDataSensorIR']);
+Route::post('/sendircondition', [Main::class, 'sendDataSensorIR']);
+
 
 // For Get Status Control
 Route::get('/iot', [Main::class, 'getStatus'])->name('getStatus');

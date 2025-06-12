@@ -20,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->validateCsrfTokens(except: [
             'http://103.179.56.23:8000/sendmode*',
+            'http://103.179.56.23:8000/sendircondition*'
         ]);
     })
     ->create();
