@@ -87,6 +87,8 @@ class Main extends Controller
             Cache::put('do', 'right', now()->addMinutes(1));
         } else if ($status === "stop") {
             Cache::put('do', 'stop', now()->addMinutes(1));            
+        } else if ($status === "backward") {
+            Cache::put('do', 'backward', now()->addMinutes(1));            
         }
     }
 

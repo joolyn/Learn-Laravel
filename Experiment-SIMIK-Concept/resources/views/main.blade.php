@@ -25,6 +25,7 @@
     <button id="myButtonLeft" onclick="doLeft()" type="submit" style="font-size:24px;">Left</button>
     <button id="myButtonRight" onclick="doRight()" type="submit" style="font-size:24px;">Right</button>
     <button id="myButtonStop" onclick="doStop()" type="submit" style="font-size:24px;">Stop</button>
+    <button id="myButtonBackward" onclick="doBackward()" type="submit" style="font-size:24px;">Backward</button>
     <br>
     <h1>Status: <span id="status"></span></h1>
     <button type="submit" onclick="sendStatus" style="font-size:24px;">Tekan Untuk Nyala / Mati</button>
@@ -130,6 +131,19 @@
         function doStop () {
             axios.post('http://localhost:8000/send-do', {
                 "do": "stop"
+            })
+            .then(function (response) {
+                console.log('Response:', response.data);
+                getData();
+            })
+            .catch(function (error) {
+                console.error('Terjadi kesalahan:', error);
+            });
+        }
+
+        function doBackward () {
+            axios.post('http://localhost:8000/send-do', {
+                "do": "backward"
             })
             .then(function (response) {
                 console.log('Response:', response.data);
