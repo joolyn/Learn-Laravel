@@ -94,6 +94,6 @@ class Main extends Controller
     {
         $mode = Cache::get('led_mode', 'manual'); // default mode adalah 'normal'
         $do = Cache::get('do', 'stop');
-        return response()->json(['mode' => $mode, 'do' => $do]);
+        return response()->json(['mode' => $mode, 'action' => $do]);
     }
 }
