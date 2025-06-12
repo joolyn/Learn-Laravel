@@ -63,7 +63,7 @@
 
                     // Perbaikan penulisan function dan ID
                     document.getElementById('mode').textContent = data.mode || "";
-                    document.getElementById('do').textContent = data.do || "";
+                    document.getElementById('do').textContent = data.action || "";
                 })
                 .catch(error => {
                     console.error('Error ambil data:', error);
